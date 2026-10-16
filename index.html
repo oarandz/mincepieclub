@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A little club for a very important Christmas question. Taste, rate and discover your favourite mince pies.">
+  <meta name="theme-color" content="#244b3a"><meta name="referrer" content="no-referrer">
+  <title>Mince Pie Club — good pies, honest opinions</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="header"><a class="wordmark" href="#taste"><span class="logo" aria-hidden="true">✳</span><span>Mince Pie <em>Club</em></span></a>
+    <nav id="table-nav" aria-label="The table" hidden><a href="#table" data-nav="table">All pies</a><a href="#rankings" data-nav="rankings">Rankings</a><a href="#people" data-nav="people">Tasters</a><a href="#operator" data-nav="operator">Operator</a></nav>
+    <div class="header-actions"><a class="button table-button" id="table-button" href="#table" hidden>The table ↗</a><button class="button profile-button" id="profile-button" hidden>Choose your name</button></div>
+  </header>
+  <div id="mode-banner" class="mode-banner" hidden></div>
+  <main id="main" tabindex="-1"><p class="loading">Putting the kettle on…</p></main>
+  <footer><span class="footer-brand">Mince Pie Club <span>✳</span></span><p>Good pies. Honest opinions. A little festive competition.</p></footer>
+  <dialog id="modal"><button class="close" id="close-modal" aria-label="Close dialog">×</button><div id="modal-content"></div></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script src="./config.js"></script><script type="module" src="./app.js"></script>
+</body></html>
