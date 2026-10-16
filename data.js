@@ -83,14 +83,16 @@ export async function removeReview(id) {
   await request(`/rest/v1/reviews?id=eq.${encodeURIComponent(id)}`,{method:'DELETE'});
 }
 export async function isOperator() {if(demo)return sessionStorage.getItem('mpc-demo-operator')==='yes';if(!session)return false;return await request('/rest/v1/rpc/is_operator',{method:'POST',body:{}});}
-export async function operatorLogin(email) {
+export async function operatorLogin(password) {
+  if(!password)throw new Error('Enter the operator password.');
   if(demo){sessionStorage.setItem('mpc-demo-operator','yes');return;}
-  const redirect=location.origin+location.pathname+'#operator';
-  await request(`/auth/v1/otp?redirect_to=${encodeURIComponent(redirect)}`,{method:'POST',body:{email,create_user:true},auth:false});
+  const result=await request('/functions/v1/operator-login',{method:'POST',body:{password},auth:false});
+  saveSession({...result,expires_at:Date.now()/1000+result.expires_in});
 }
+
 export async function operatorLogout() {
   sessionStorage.removeItem('mpc-demo-operator');
-  try{if(!demo && session)await request('/auth/v1/logout',{method:'POST'});}finally{saveSession(null);}
+  try{if(!demo && session)await request('/auth/v1/logout?scope=local',{method:'POST'});}finally{saveSession(null);}
 }
 export async function captureLogin() {
   const hash=new URLSearchParams(location.hash.slice(1));
